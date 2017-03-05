@@ -71,9 +71,8 @@ if [ $mineAnswer == "y" ] || [ $mineAnswer == "Y" ]
 else
 	echo
 	echo 'closing program....'
-	exit 1
 fi
-rm -rf PID.txt #remove the temp file created to hold the PID
+
 
 
 

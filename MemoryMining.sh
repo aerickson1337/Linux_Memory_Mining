@@ -27,7 +27,7 @@ echo '------------------------------------------'
 echo '       Current Running Processes:         '
 echo '------------------------------------------'
 echo
-if [ $PID == "y" ] || [ $PiD == "Y" ]
+if [ $PID == "y" ] || [ $PID == "Y" ]
 	then
 	echo '-----------------------'
 	echo 'Showing All Processes: '
@@ -50,5 +50,5 @@ if [ $PID == "y" ] || [ $PiD == "Y" ]
 	/home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh
 
 fi
-exit 1
+exit 0
 
