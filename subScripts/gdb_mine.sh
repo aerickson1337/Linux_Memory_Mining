@@ -55,12 +55,18 @@ if [ $mineAnswer == "y" ] || [ $mineAnswer == "Y" ]
 	echo -n 'Would you like to dump the stack or the heap? '; read dump
 	if [ $dump == "heap" ] || [ $dump == "Heap" ]
 		then
-		gdb --pid $PID -ex "dump memory HeapDump.hex $heapAddressFinal" # to add another command -ex command
+		gdb --pid $PID -ex "dump memory HeapDump.hex $heapAddressFinal" -ex "detach" -ex "quit" # to add another command -ex command
+		clear #Clear the console
+		echo '---------------------------'
 		echo 'Data dumped to HeapDump.hex'
+		echo '---------------------------'
 	elif [ $dump == "stack" ] || [ $dump == "Stack" ]
 		then
-		gdb --pid $PID -ex "dump memory StackDump.hex $stackAddressFinal" 
+		gdb --pid $PID -ex "dump memory StackDump.hex $stackAddressFinal" -ex "detach" -ex "quit"
+		clear #Clear the console
+		echo '----------------------------'
 		echo 'Data dumped to StackDump.hex'
+		echo '----------------------------'
 	fi
 else
 	echo
