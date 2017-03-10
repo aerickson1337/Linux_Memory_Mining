@@ -4,6 +4,21 @@
 #Mine primary memory segments for data
 #By: Joshua Faust
 #==================================================
+#Check if root
+
+if [ $(whoami) != "root" ]
+        then
+        echo 'You are not root, you may not be able to fully utilize this program. Continue? (y|n)'; read continue
+        if [ $continue == "y" ] || [ $continue == "Y" ]
+                then
+                echo 'Continuing'
+        else
+                echo "Closing the Program."
+                exit 0
+        fi
+fi
+
+
 
 echo '============================================'
 echo '           Primary Memory Miner             '
