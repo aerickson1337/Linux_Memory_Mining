@@ -68,7 +68,7 @@ if [ $PID == "y" ] || [ $PID == "Y" ]
  	read choice || continue
   	case $choice in
     		[Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
-    		[Ff]) echo 'C code will go here' ;;
+    		[Ff]) /home/josh/Linux_Memory_Mining/subScripts/FlagChanger ;;
     		[Aa]) echo 'BASH sccript will be called here' ;;
     		[Qq]) exit ;;
     		*) tput cup 12 6; echo "wrong code"; read choice ;;
@@ -89,7 +89,7 @@ if [ $PID == "y" ] || [ $PID == "Y" ]
         read choice || continue
         case $choice in
                 [Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
-                [Ff]) echo 'C code will go here' ;;
+                [Ff]) /home/josh/Linux_Memory_Mining/subScripts/FlagChanger ;;
                 [Aa]) echo 'BASH sccript will be called here' ;;
                 [Qq]) exit ;;
                 *) tput cup 12 6; echo "wrong code"; read choice ;;
