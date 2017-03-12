@@ -4,8 +4,9 @@
 #Mine primary memory segments for data
 #By: Joshua Faust
 #==================================================
-#Check if root
 
+
+#Check if root
 if [ $(whoami) != "root" ]
         then
         echo 'You are not root, you may not be able to fully utilize this program. Continue? (y|n)'; read continue
@@ -18,12 +19,10 @@ if [ $(whoami) != "root" ]
         fi
 fi
 
-
-
 echo '============================================'
 echo '           Primary Memory Miner             '
 echo '============================================'
-echo 
+echo '' 
 echo '-------------------------------------------'
 echo ' Creating directory to store process dump  '
 echo '-------------------------------------------'
@@ -31,38 +30,74 @@ echo '    All data gathered will be stored in    '
 echo '     mining_out_data Directory unless      '
 echo '     specified otherwise by the user       '
 echo '-------------------------------------------'
+#Create a directory to store output data in
 mkdir mining_output_data 
 cd mining_output_data
-ps -aux | awk '{print $1,$2,$11}' > all_processes.txt #Obtain all processes from all users
-ps -u $USER > user_processes.txt #Obtain user level processes
-echo 
+
+#Obtain Processes Data for the user:
+ps -aux | awk '{print $1,$2,$11}' > all_processes.txt
+ps -u $USER > user_processes.txt
+echo ''
+
+#Have the user select which PID they would like to mine:
 echo -n "Would you like to see current running Processes PID's?(y or n) "; read PID
-clear # clear the screen
-echo '------------------------------------------'
-echo '       Current Running Processes:         '
-echo '------------------------------------------'
-echo
+clear
 if [ $PID == "y" ] || [ $PID == "Y" ]
 	then
 	echo '-----------------------'
-	echo 'Showing All Processes: '
+	echo '     All Processes:    '
 	echo '-----------------------'
 	cat all_processes.txt
 	echo '------------------------------'
-	echo 'Showing User Level Processes: '
+	echo '     User Level Processes:    '
 	echo '------------------------------'
 	cat user_processes.txt
+	echo ''
 	echo '----------------------------------------'
-	echo
-	#Call the mining script:
-	/home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh
+	echo ''
+	echo -n 'Write down the PID! Are you ready to continue? (y|n) '; read answer
+	clear
+	loop=y
+	while [ $loop == "y" ]
+	do
+	tput cup 2 10; echo 'GDB Memory Mining Menu'
+	tput cup 3 10; echo '----------------------'
+	tput cup 5 8; echo "M - Mine the Stack or Heap"
+	tput cup 6 8; echo "F - Edit memory Flags"
+ 	tput cup 7 8; echo "A - Append data to memory address"
+  	tput cup 10 8; echo "Q - Quit"
+ 	read choice || continue
+  	case $choice in
+    		[Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
+    		[Ff]) echo 'C code will go here' ;;
+    		[Aa]) echo 'BASH sccript will be called here' ;;
+    		[Qq]) exit ;;
+    		*) tput cup 12 6; echo "wrong code"; read choice ;;
+ 		esac
+	echo -n 'Would you like to continue? (y|n) '; read loop
+	clear
+	done
 	else
-	echo '-----------------------------'
-	echo 'Starting Mining Processes    '
-	echo '-----------------------------'
-	echo
-	#Call the mining script:
-	/home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh
+	 loop=y
+        while [ $loop == "y" ]
+        do
+        tput cup 2 10; echo 'GDB Memory Mining Menu'
+        tput cup 3 10; echo '----------------------'
+        tput cup 5 8; echo "M - Mine the Stack or Heap"
+        tput cup 6 8; echo "F - Edit memory Flags"
+        tput cup 7 8; echo "A - Append data to memory address"
+        tput cup 10 8; echo "Q - Quit"
+        read choice || continue
+        case $choice in
+                [Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
+                [Ff]) echo 'C code will go here' ;;
+                [Aa]) echo 'BASH sccript will be called here' ;;
+                [Qq]) exit ;;
+                *) tput cup 12 6; echo "wrong code"; read choice ;;
+                esac
+        echo -n 'Would you like to continue? (y|n) '; read loop
+        clear
+	done
 
 fi
 exit 0
