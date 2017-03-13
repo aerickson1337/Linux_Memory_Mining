@@ -26,19 +26,19 @@ echo ''
 echo ''
 echo '-------------------------------------------'
 echo '    All data gathered will be stored in    '
-echo '     mining_out_data Directory unless      '
+echo '     miningt_data Directory unless      '
 echo '     specified otherwise by the user       '
 echo '-------------------------------------------'
 #Create a directory to store output data in
-mkdir mining_output_data 
-cd mining_output_data
+mkdir mining_data 
+cd mining_data
 
 #Obtain Processes Data for the user:
 ps -aux | awk '{print $1,$2,$11}' > all_processes.txt
 ps -u $USER > user_processes.txt
 echo ''
 
-#Have the user select which PID they would like to mine:
+#Ask user if they would like to see all the running processes
 echo -n "Would you like to see current running Processes PID's?(y or n) "; read PID
 clear
 if [ $PID == "y" ] || [ $PID == "Y" ]
@@ -56,16 +56,18 @@ if [ $PID == "y" ] || [ $PID == "Y" ]
 	echo ''
 	echo -n 'Write down the PID! Are you ready to continue? (y|n) '; read answer
 	clear
+
+	#Main Menu:
 	loop=y
 	while [ $loop == "y" ]
 	do
-	tput cup 2 10; echo 'GDB Memory Mining Menu'
-	tput cup 3 10; echo '----------------------'
-	tput cup 5 8; echo "M - Mine the Stack or Heap"
-	tput cup 6 8; echo "F - Edit memory Flags"
- 	tput cup 7 8; echo "A - Append data to memory address"
-  	tput cup 10 8; echo "Q - Quit"
- 	read choice || continue
+		tput cup 2 10; echo 'GDB Memory Mining Menu'
+		tput cup 3 10; echo '----------------------'
+		tput cup 5 8; echo "M - Mine the Stack or Heap"
+		tput cup 6 8; echo "F - Edit memory Flags"
+ 		tput cup 7 8; echo "A - Append data to memory address"
+  		tput cup 10 8; echo "Q - Quit"
+ 		read choice || continue
   	case $choice in
     		[Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
     		[Ff]) /home/josh/Linux_Memory_Mining/subScripts/FlagChanger ;;
@@ -77,15 +79,17 @@ if [ $PID == "y" ] || [ $PID == "Y" ]
 	clear
 	done
 	else
-	 loop=y
+
+	#Main Menu:
+	loop=y
         while [ $loop == "y" ]
         do
-        tput cup 2 10; echo 'GDB Memory Mining Menu'
-        tput cup 3 10; echo '----------------------'
-        tput cup 5 8; echo "M - Mine the Stack or Heap"
-        tput cup 6 8; echo "F - Edit memory Flags"
-        tput cup 7 8; echo "A - Append data to memory address"
-        tput cup 10 8; echo "Q - Quit"
+	        tput cup 2 10; echo 'GDB Memory Mining Menu'
+	        tput cup 3 10; echo '----------------------'
+	        tput cup 5 8; echo "M - Mine the Stack or Heap"
+	        tput cup 6 8; echo "F - Edit memory Flags"
+	        tput cup 7 8; echo "A - Append data to memory address"
+	        tput cup 10 8; echo "Q - Quit"
         read choice || continue
         case $choice in
                 [Mm]) /home/josh/Linux_Memory_Mining/subScripts/gdb_mine.sh ;;
