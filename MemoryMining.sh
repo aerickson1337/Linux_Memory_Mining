@@ -26,7 +26,7 @@ echo ''
 echo ''
 echo '-------------------------------------------'
 echo '    All data gathered will be stored in    '
-echo '     miningt_data Directory unless      '
+echo '     mining_data Directory unless      '
 echo '     specified otherwise by the user       '
 echo '-------------------------------------------'
 #Create a directory to store output data in
